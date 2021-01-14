@@ -43,11 +43,21 @@ export default class App extends Component {
     });
     this.setState({ counters });
   };
+
+  doSum = () => {
+    let count = 0;
+    this.state.counters.filter((e) => e.value > 0).forEach((e) => (count += e));
+    return count;
+  };
+
   render() {
     return (
       <div className="container">
         <NavBar
           totalCount={this.state.counters.filter((c) => c.value > 0).length}
+          total={this.state.counters.reduce(function (prev, cur) {
+            return prev + cur.value;
+          }, 0)}
           onReset={this.handleReset}
         />
         <main className="container-fluid">
